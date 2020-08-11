@@ -36,7 +36,7 @@
 
                                 <div class="form-group">
                                     <label for="image">Featured Image</label>
-                                    <input type="file" name="image" value="" multiple="" >
+                                    <input type="file" name="image[]" multiple >
                                 </div>
 
                             <div class="form-group">
@@ -82,7 +82,7 @@
                                     <label for="tag">Select Location</label>
                                     <select name="location" id="location" class="form-control show-tick" data-live-search="true" multiple required>
                                         @foreach($areas as $area)
-                                            <option value="{{ $area->id }}">{{ $area->name }}</option>
+                                            <option value="{{ $area->id }}">{{ $area->area_name }}</option>
                                         @endforeach
                                     </select>
                                 </div>

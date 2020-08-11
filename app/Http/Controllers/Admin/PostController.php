@@ -69,6 +69,8 @@ class PostController extends Controller
         $slug = str_slug($request->title);
         if(isset($image))
         {
+            foreach($image as $key => $value){
+
 //            make unipue name for image
             $currentDate = Carbon::now()->toDateString();
             $imageName  = $slug.'-'.$currentDate.'-'.uniqid().'.'.$image->getClientOriginalExtension();
@@ -80,7 +82,8 @@ class PostController extends Controller
 
             $postImage = Image::make($image)->resize(1600,1066)->save($imageName);
             Storage::disk('public')->put('post/'.$imageName,$postImage);
-
+            array_push($img, $imageName);
+        }
         } else {
             $imageName = "default.png";
         }

@@ -35,7 +35,7 @@
 
                                 <div class="form-group">
                                     <label for="image">Featured Image</label>
-                                    <input type="file" name="image">
+                                    <input type="file" name="image[]" multiple>
                                 </div>
 
                             <div class="form-group">

@@ -56,8 +56,13 @@
                                 Featured Image
                             </h2>
                         </div>
+                        @php
+                           $images = explode(",",$post->image);
+                        @endphp
                         <div class="body">
-                            <img class="img-responsive thumbnail" src="{{ Storage::disk('public')->url('post/'.$post->image) }}" alt="">
+                            @foreach($images as $key => $img)
+                            <img class="img-responsive thumbnail" src="{{ Storage::disk('public')->url('post/'.$images[$key]) }}" alt="">
+                            @endforeach
                         </div>
                     </div>
 

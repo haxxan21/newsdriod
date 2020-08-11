@@ -56,6 +56,8 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
+        $post = new Post();
+
         $this->validate($request,[
             'title' => 'required',
             'image' => 'required',
@@ -65,29 +67,36 @@ class PostController extends Controller
             'location' => 'required'
         ]);
         $image = $request->file('image');
+        $img = array();
         $slug = str_slug($request->title);
         if(isset($image))
         {
+            foreach($image as $key => $value){
 //            make unipue name for image
             $currentDate = Carbon::now()->toDateString();
-            $imageName  = $slug.'-'.$currentDate.'-'.uniqid().'.'.$image->getClientOriginalExtension();
+            $imageName  = $slug.'-'.$currentDate.'-'.uniqid().'.'.$image[$key]->getClientOriginalExtension();
 
             if(!Storage::disk('public')->exists('post'))
             {
                 Storage::disk('public')->makeDirectory('post');
             }
 
-            $postImage = Image::make($image)->resize(1600,1066)->save($imageName);
+            $postImage = Image::make($image[$key])->resize(1600,1066)->save($imageName);
             Storage::disk('public')->put('post/'.$imageName,$postImage);
-
-        } else {
+            array_push($img, $imageName);
+        }
+        // dd(count($img));
+     } else {
             $imageName = "default.png";
         }
-        $post = new Post();
         $post->user_id = Auth::id();
         $post->title = $request->title;
         $post->slug = $slug;
-        $post->image = $imageName;
+        if(count($image) > 1){
+            $post->image = implode(",",$img);
+        } else{
+            $post->image = $imageName;
+        }
         $post->body = $request->body;
         $post->location = $request->location;
         if(isset($request->status))
@@ -165,35 +174,37 @@ class PostController extends Controller
             'tags' => 'required',
             'body' => 'required',
             'location' => 'required'
-        ]);
-        $image = $request->file('image');
-        $slug = str_slug($request->title);
-        if(isset($image))
-        {
+            ]);
+            $image = $request->file('image');
+            // dd(count($image));
+            $img = array();
+            $slug = str_slug($request->title);
+            if(!empty($image) && count($image) > 0)
+            {
+            foreach($image as $key => $value){
 //            make unipue name for image
             $currentDate = Carbon::now()->toDateString();
-            $imageName  = $slug.'-'.$currentDate.'-'.uniqid().'.'.$image->getClientOriginalExtension();
+            $imageName  = $slug.'-'.$currentDate.'-'.uniqid().'.'.$image[$key]->getClientOriginalExtension();
 
             if(!Storage::disk('public')->exists('post'))
             {
                 Storage::disk('public')->makeDirectory('post');
             }
-//            delete old post image
-            if(Storage::disk('public')->exists('post/'.$post->image))
-            {
-                Storage::disk('public')->delete('post/'.$post->image);
-            }
-            $postImage = Image::make($image)->resize(1600,1066)->save($imageName);
-            Storage::disk('public')->put('post/'.$imageName,$postImage);
 
-        } else {
-            $imageName = $post->image;
+            $postImage = Image::make($image[$key])->resize(1600,1066)->save($imageName);
+            Storage::disk('public')->put('post/'.$imageName,$postImage);
+            array_push($img, $imageName);
+        }
+     } else {
+            $imageName = "default.png";
         }
 
         $post->user_id = Auth::id();
         $post->title = $request->title;
         $post->slug = $slug;
-        $post->image = $imageName;
+        if(!empty($image) && count($image) > 0){
+            $post->image = implode(",",$img);
+        }
         $post->body = $request->body;
         $post->location = $request->location;
         if(isset($request->status))

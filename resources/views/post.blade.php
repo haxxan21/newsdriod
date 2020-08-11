@@ -40,8 +40,13 @@
 
                         <div class="post-content-area">
                             <div class="post-media post-featured-image">
-                                <a href="{{ Storage::disk('public')->url('post/'.$post->image) }}" class="gallery-popup">
-                                <img src="{{ Storage::disk('public')->url('post/'.$post->image) }}" class="img-fluid" alt=""></a>
+                                @php
+                                    $image = explode(",",$post->image);
+                                @endphp
+                                @foreach ($image as $key => $item)
+                                <a href="{{ Storage::disk('public')->url('post/'.$image[$key]) }}" class="gallery-popup">
+                                <img src="{{ Storage::disk('public')->url('post/'.$image[$key]) }}" class="img-fluid" alt=""></a>
+                                @endforeach
                             </div>
                             <div class="entry-content">
                                 {!! html_entity_decode($post->body) !!}

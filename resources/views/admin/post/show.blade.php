@@ -8,7 +8,7 @@
 
 @section('content')
     <div class="container-fluid">
-     
+
         <a href="{{ route('admin.post.index') }}" class="btn btn-danger waves-effect">BACK</a>
         @if($post->is_approved == false)
             <button type="button" class="btn btn-success waves-effect pull-right" onclick="approvePost({{ $post->id }})">
@@ -73,7 +73,12 @@
                             </h2>
                         </div>
                         <div class="body">
-                            <img class="img-responsive thumbnail" src="{{ Storage::disk('public')->url('post/'.$post->image) }}" alt="">
+                            @php
+                                $image = explode(",", $post->image);
+                            @endphp
+                            @foreach ($image as $key => $item)
+                            <img class="img-responsive thumbnail" src="{{ Storage::disk('public')->url('post/'.$image[$key]) }}" alt="">
+                            @endforeach
                         </div>
                     </div>
 
@@ -90,7 +95,7 @@
     <script src="https://unpkg.com/sweetalert2@7.19.1/dist/sweetalert2.all.js"></script>
     <script>
         $(function () {
-            
+
             tinymce.init({
                 selector: "textarea#tinymce",
                 theme: "modern",

@@ -49,7 +49,10 @@
 									<div class="post-block-style post-grid clearfix">
 										<div class="post-thumb">
 											<a href="#">
-												<img class="img-fluid" src="{{ Storage::disk('public')->url('post/'.$post->image) }}" alt="" />
+                                                @php
+                                                    $image = explode(",",$post->image);
+                                                @endphp
+												<img class="img-fluid" src="{{ Storage::disk('public')->url('post/'.$image[0]) }}" alt="" />
 											</a>
 										</div>
 										<div class="post-content">
