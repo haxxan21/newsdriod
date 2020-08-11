@@ -88,7 +88,7 @@
                                         <tr>
                                             <td>{{ $key + 1 }}</td>
                                             <td>{{ str_limit($post->title,30) }}</td>
-                                            <td>{{ $post->location->area_name ?? "NULL" }}</td>
+                                            <td>{{ $posts[$key]->location_area ?? "NULL" }}</td>
                                             <td>{{ $post->view_count }}</td>
                                             <td>{{ $post->favorite_to_users_count }}</td>
                                             <td>{{ $post->comments_count }}</td>

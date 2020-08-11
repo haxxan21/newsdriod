@@ -65,6 +65,7 @@ class PostController extends Controller
             'body' => 'required',
             'location' => 'required',
         ]);
+        $img = array();
         $image = $request->file('image');
         $slug = str_slug($request->title);
         if(isset($image))
@@ -73,14 +74,14 @@ class PostController extends Controller
 
 //            make unipue name for image
             $currentDate = Carbon::now()->toDateString();
-            $imageName  = $slug.'-'.$currentDate.'-'.uniqid().'.'.$image->getClientOriginalExtension();
+            $imageName  = $slug.'-'.$currentDate.'-'.uniqid().'.'.$image[$key]->getClientOriginalExtension();
 
             if(!Storage::disk('public')->exists('post'))
             {
                 Storage::disk('public')->makeDirectory('post');
             }
 
-            $postImage = Image::make($image)->resize(1600,1066)->save($imageName);
+            $postImage = Image::make($image[$key])->resize(1600,1066)->save($imageName);
             Storage::disk('public')->put('post/'.$imageName,$postImage);
             array_push($img, $imageName);
         }
