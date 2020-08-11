@@ -12,7 +12,7 @@
             <h2>DASHBOARD</h2>
         </div>
 
-       
+
         <div class="row clearfix">
             <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
                 <div class="info-box bg-green hover-expand-effect">
@@ -59,7 +59,7 @@
                 </div>
             </div>
         </div>
-       
+
         <div class="row clearfix">
             <div class="col-xs-12 col-sm-12 col-md-4 col-lg-3">
                 <div class="info-box bg-pink hover-zoom-effect">
@@ -112,6 +112,7 @@
                                         <th>Rank</th>
                                         <th>Title</th>
                                         <th>Users</th>
+                                        <th>Location</th>
                                         <th>Views</th>
                                         <th>Favorite</th>
                                         <th>Comments</th>
@@ -125,6 +126,7 @@
                                             <td>{{ $key + 1 }}</td>
                                             <td>{{ str_limit($post->title,'20') }}</td>
                                             <td>{{ $post->user->name }}</td>
+                                        <td>{{ $post->location->area_name ?? "NULL" }}</td>
                                             <td>{{ $post->view_count }}</td>
                                             <td>{{ $post->favorite_to_users_count }}</td>
                                             <td>{{ $post->comments_count }}</td>
@@ -147,10 +149,10 @@
                 </div>
             </div>
         </div>
-     
+
 
         <div class="row clearfix">
-           
+
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                 <div class="card">
                     <div class="header">
@@ -184,7 +186,7 @@
                     </div>
                 </div>
             </div>
-            
+
         </div>
     </div>
 @endsection

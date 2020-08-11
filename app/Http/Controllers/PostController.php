@@ -7,6 +7,7 @@ use App\Category;
 use App\Post;
 use App\Tag;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 
 class PostController extends Controller
@@ -21,9 +22,8 @@ class PostController extends Controller
     public function details($slug)
     {
         $post = Post::where('slug',$slug)->approved()->published()->first();
-
+        $post->location = DB::table('areas')->select('area_name')->where('id', $post->location)->first();
         $blogKey = 'blog_' . $post->id;
-
         if (!Session::has($blogKey)) {
             $post->increment('view_count');
             Session::put($blogKey,1);

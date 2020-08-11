@@ -37,7 +37,7 @@
                                     <th>Is Approved</th>
                                     <th>Status</th>
                                     <th>Created At</th>
-                                    {{--<th>Updated At</th>--}}
+                                    <th>Location</th>
                                     <th>Action</th>
                                 </tr>
                                 </thead>
@@ -50,7 +50,7 @@
                                     <th>Is Approved</th>
                                     <th>Status</th>
                                     <th>Created At</th>
-                                    {{--<th>Updated At</th>--}}
+                                    <th>Location</th>
                                     <th>Action</th>
                                 </tr>
                                 </tfoot>
@@ -76,6 +76,8 @@
                                                 @endif
                                             </td>
                                             <td>{{ $post->created_at }}</td>
+                                            <td>{{ $post->location->area_name ?? "NULL"  }}</td>
+
                                             {{--<td>{{ $post->updated_at }}</td>--}}
                                             <td class="text-center">
                                                 @if($post->is_approved == false)
@@ -148,7 +150,7 @@
                     event.preventDefault();
                     document.getElementById('delete-form-'+id).submit();
                 } else if (
-                    
+
                     result.dismiss === swal.DismissReason.cancel
                 ) {
                     swal(
@@ -178,7 +180,7 @@
                     event.preventDefault();
                     document.getElementById('approval-form-'+ id).submit();
                 } else if (
-                    
+
                     result.dismiss === swal.DismissReason.cancel
                 ) {
                     swal(

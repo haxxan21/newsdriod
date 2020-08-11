@@ -76,6 +76,7 @@
                                 <tr>
                                     <th>Rank List</th>
                                     <th>Title</th>
+                                    <th>Location</th>
                                     <th>Views</th>
                                     <th>Favorite</th>
                                     <th>Comments</th>
@@ -87,6 +88,7 @@
                                         <tr>
                                             <td>{{ $key + 1 }}</td>
                                             <td>{{ str_limit($post->title,30) }}</td>
+                                            <td>{{ $post->location->area_name ?? "NULL" }}</td>
                                             <td>{{ $post->view_count }}</td>
                                             <td>{{ $post->favorite_to_users_count }}</td>
                                             <td>{{ $post->comments_count }}</td>

@@ -28,6 +28,11 @@ class PostController extends Controller
     public function index()
     {
         $posts = Post::latest()->get();
+        foreach($posts as $key => $value){
+            $location = DB::table('areas')->select('area_name')->where('id', $posts[$key]->location)->first();
+            $posts[$key]->location = $location ?? "";
+        }
+        // echo "<pre>"; print_r($posts); exit;
         return view('admin.post.index',compact('posts'));
     }
 
@@ -200,6 +205,10 @@ class PostController extends Controller
     public function pending()
     {
         $posts = Post::where('is_approved',false)->get();
+        foreach($posts as $key => $value){
+            $location = DB::table('areas')->select('area_name')->where('id', $posts[$key]->location)->first();
+            $posts[$key]->location = $location ?? "";
+        }
         return view('admin.post.pending',compact('posts'));
     }
 

@@ -8,6 +8,7 @@ use App\Tag;
 use App\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 
 class DashboardController extends Controller
@@ -15,6 +16,10 @@ class DashboardController extends Controller
     public function index()
     {
         $posts = Post::all();
+        foreach($posts as $key => $value){
+            $location = DB::table('areas')->select('area_name')->where('id', $posts[$key]->location)->first();
+            $posts[$key]->location = $location ?? "";
+        }
         $popular_posts = Post::withCount('comments')
                             ->withCount('favorite_to_users')
                             ->orderBy('view_count','desc')

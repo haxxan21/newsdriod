@@ -5,7 +5,7 @@
 @endsection
 
 @push('css')
-    
+
 @endpush
 
 @section('content')
@@ -21,7 +21,7 @@
                                     <a href="{{ route('category.posts',$category->slug) }}">{{ $category->name }}</a>
                                 @endforeach
                             </div>
-                            
+
                             <h2 class="post-title">
                             {{ $post->title }}
                             </h2>
@@ -33,6 +33,8 @@
                                 <span class="post-hits"><i class="fa fa-eye"></i> {{ $post->view_count }}</span>
                                 <span class="post-comment"><i class="fa fa-comments-o"></i>{{$post->comments->count()}}</span>
                                 <a href="#" class="comments-link"><span></a></span>
+                                <a href="{{ route('location',$post->location->area_name) }}">{{ $post->location->area_name }}</a>
+
                             </div>
                         </div><!-- Post title end -->
 
@@ -165,17 +167,17 @@
 
                         <div class="widget color-default">
                             <h3 class="block-title"><span>Popular News</span></h3>
-                        
+
                             <div class="list-post-block">
                                 <ul class="list-post">
                                 <li class="clearfix">
                                         <div class="post-block-style post-float clearfix">
-                                            
+
 
                                             <div class="post-content">
                                                 <h2 class="post-title title-small">
                                                     <a href="#">Nadra offices reopening from 17th May</a>
-                                                    
+
                                                 </h2>
                                                 <div class="post-meta">
                                                     <span class="post-date">May 15, 2020</span>
@@ -185,12 +187,12 @@
                                     </li><!-- Li 1 end -->
                                     <li class="clearfix">
                                         <div class="post-block-style post-float clearfix">
-                                            
+
 
                                             <div class="post-content">
                                                 <h2 class="post-title title-small">
                                                     <a href="#">Punjab province opened public transport today</a>
-                                                    
+
                                                 </h2>
                                                 <div class="post-meta">
                                                     <span class="post-date">May 17, 2020</span>
@@ -201,7 +203,7 @@
 
                                     <li class="clearfix">
                                         <div class="post-block-style post-float clearfix">
-                                            
+
 
                                             <div class="post-content">
                                                 <h2 class="post-title title-small">
@@ -216,7 +218,7 @@
 
                                     <li class="clearfix">
                                         <div class="post-block-style post-float clearfix">
-                                            
+
 
                                             <div class="post-content">
                                                 <h2 class="post-title title-small">
@@ -229,14 +231,14 @@
                                         </div><!-- Post block style end -->
                                     </li><!-- Li 3 end -->
 
-                                    
+
 
                                 </ul><!-- List post end -->
                             </div><!-- List post block end -->
 
                         </div><!-- Popular news widget end -->
 
-                      
+
 
                         <div class="widget widget-tags">
                             <h3 class="block-title"><span>Tags</span></h3>

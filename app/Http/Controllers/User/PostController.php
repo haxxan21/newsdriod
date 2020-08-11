@@ -28,6 +28,10 @@ class PostController extends Controller
     public function index()
     {
         $posts = Auth::user()->posts()->latest()->get();
+        foreach($posts as $key => $value){
+            $location = DB::table('areas')->select('area_name')->where('id', $posts[$key]->location)->first();
+            $posts[$key]->location = $location ?? "";
+        }
         return view('user.post.index',compact('posts'));
     }
 

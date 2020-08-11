@@ -24,6 +24,10 @@ class HomeController extends Controller
     {
         $categories = Category::all();
         $posts = Post::latest()->approved()->published()->paginate(10);
+        foreach($posts as $key => $value){
+            $location = DB::table('areas')->select('area_name')->where('id', $posts[$key]->location)->first();
+            $posts[$key]->location = $location ?? "";
+        }
         $recentposts = Post::latest()->approved()->published()->get();
         $areas =  DB::table('areas')->orderBy('area_name')->get();
         return view('welcome',compact('categories','posts','recentposts', 'areas'));

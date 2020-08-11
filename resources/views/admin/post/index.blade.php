@@ -37,6 +37,7 @@
                                     <th>Is Approved</th>
                                     <th>Status</th>
                                     <th>Created At</th>
+                                    <th>Location</th>
                                     {{--<th>Updated At</th>--}}
                                     <th>Action</th>
                                 </tr>
@@ -50,13 +51,15 @@
                                     <th>Is Approved</th>
                                     <th>Status</th>
                                     <th>Created At</th>
+                                    <th>Location</th>
                                     {{--<th>Updated At</th>--}}
                                     <th>Action</th>
                                 </tr>
                                 </tfoot>
                                 <tbody>
                                     @foreach($posts as $key=>$post)
-                                        <tr>
+                                    {{-- @php print_r($post->location->area_name); exit; @endphp --}}
+                                    <tr>
                                             <td>{{ $key + 1 }}</td>
                                             <td>{{ str_limit($post->title,'10') }}</td>
                                             <td>{{ $post->user->name }}</td>
@@ -76,6 +79,7 @@
                                                 @endif
                                             </td>
                                             <td>{{ $post->created_at }}</td>
+                                            <td>{{ $post->location->area_name ?? "NULL"  }}</td>
                                             {{--<td>{{ $post->updated_at }}</td>--}}
                                             <td class="text-center">
                                                 <a href="{{ route('admin.post.show',$post->id) }}" class="btn btn-info waves-effect">

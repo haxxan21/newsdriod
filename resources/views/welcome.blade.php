@@ -58,7 +58,8 @@
 											</h2>
 											<div class="post-meta">
 												<span class="post-author"><a href="{{ route('post.details',$post->slug) }}">{{$post->user->name}}</a></span>
-												<span class="post-date">{{ $post->created_at->diffForHumans() }}</span>
+                                                <span class="post-date">{{ $post->created_at->diffForHumans() }}</span>
+                                            <span class="post-date">{{ $post->location->area_name ?? "NULL" }}</span>
 												<span class="post-comment pull-right"><i class="fa fa-comments-o"></i>
 												<a href="#" class="comments-link"><span>{{ $post->comments->count() }}</span></a></span>
 											</div>
